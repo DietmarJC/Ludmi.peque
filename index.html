@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ludmi: La Distancia es Solo un Diagnóstico Temporal 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary-dark: #0f4c75; 
+            --color-primary-light: #3282b8; 
+            --color-secondary-pink: #ff69b4; 
+            --color-accent-teal: #00bcd4; 
+            --color-background-light: #f0f8ff; 
+            --color-background-dark: #e0f2f7; 
+            --color-text-dark: #333333;
+            --color-text-light: #ffffff;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--color-background-light) 0%, var(--color-background-dark) 100%);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink-caret {
+          from, to { border-color: transparent }
+          50% { border-color: var(--color-text-light) }
+        }
+        
+      
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+            color: var(--color-text-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999; 
+            transition: opacity 0.5s ease;
+        }
+
+        #start-button {
+            background-color: var(--color-secondary-pink);
+            color: var(--color-text-light);
+            border: 2px solid var(--color-text-light);
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        #start-button:hover {
+            background-color: #ff85c1; 
+            transform: scale(1.05);
+        }
+
+     
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+            color: var(--color-text-light);
+            padding: 8rem 1rem 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            min-height: 50vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            margin-bottom: 1rem;
+            opacity: 0; 
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-weight: 300;
+            margin-top: 1rem;
+            padding: 0 10%;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 1s forwards;
+        }
+
+      
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        section {
+            background-color: var(--color-text-light);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            animation: fadeIn 1s ease-out forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-primary-dark);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background-color: var(--color-accent-teal);
+            margin: 15px auto 0;
+            border-radius: 5px;
+        }
+
+        .poema-seccion {
+            background-image: url('data:image/svg+xml,%3Csvg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%2300bcd4" fill-opacity="0.1" fill-rule="evenodd"%3E%3Cpath d="M5 0h1L0 6V5zm1 5v1H0z"%3E%3C/path%3E%3C/g%3E%3C/svg%3E');
+            background-repeat: repeat;
+        }
+
+        .poema-content {
+            display: flex;
+            align-items: center; 
+            gap: 2rem;
+        }
+        
+        .poema-text {
+            flex: 2; 
+        }
+        
+        .poema-image-container {
+            flex: 1; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .poema-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            object-fit: cover;
+            aspect-ratio: 4/5; 
+        }
+        
+        .poema {
+            font-style: italic;
+            border-left: 6px solid var(--color-secondary-pink);
+            padding-left: 2rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 2;
+            color: var(--color-text-dark);
+            margin: 0; 
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        
+        .poema:hover {
+            transform: translateX(5px); 
+            color: var(--color-primary-dark);
+        }
+        
+        .poema strong {
+           
+            color: var(--color-secondary-pink);
+            font-weight: 400; 
+        }
+        
+        cite {
+            display: block;
+            text-align: right;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        
+        .dedicatoria p {
+            text-align: center;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--color-text-dark);
+        }
+        
+        .dedicatoria p strong {
+            color: var(--color-secondary-pink);
+        }
+
+        .cierre-simple {
+            background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+            padding: 3rem 1.5rem;
+            color: var(--color-text-light);
+            text-align: center;
+            border-radius: 12px;
+            margin-top: 4rem;
+        }
+        
+        .cierre-simple h2 {
+            color: var(--color-text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .cierre-simple p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            background-color: var(--color-primary-dark);
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 6rem 1rem 4rem;
+                min-height: 40vh;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            main {
+                padding: 1rem;
+            }
+            section {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+                margin-bottom: 2rem;
+            }
+            
+            .poema-content {
+                flex-direction: column; 
+            }
+
+            .poema-text, .poema-image-container {
+                flex: 1; 
+                width: 100%;
+            }
+            
+            .poema-image-container img {
+                max-height: 250px; 
+                width: auto;
+                aspect-ratio: auto;
+            }
+            
+            .poema {
+                padding-left: 1.5rem;
+                font-size: 0.95rem;
+            }
+            .cierre-simple p {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading-overlay">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px;">¡Hola, Ludmi! 💖</h2>
+        <p style="font-size: 1.2rem; max-width: 80%; margin: 0 auto;">Presiona el botón para entrar y activar la música de fondo que elegí para ti.</p>
+        <button id="start-button">
+            Comenzar la Experiencia
+        </button>
+    </div>
+    <audio id="audio-player" src="" style="display:none;"></audio>
+
+
+    <header class="hero">
+        <h1 id="titulo-dinamico"></h1>
+        <p>A la mujer que es brillante en sus estudios y valiente en el corazón, enfrentando kilómetros con coraje. 🤍</p>
+    </header>
+
+    <main>
+        
+        <section class="poema-seccion">
+            <h2>Tu Luz Cerca, Poema para Ludmi (LDR) ✨</h2>
+            
+            <div class="poema-content">
+                
+                <div class="poema-image-container">
+                    <img src="juntos.jpeg" alt="Foto de [Tu Nombre] y Ludmi"> 
+                </div>
+
+                <div class="poema-text">
+                    <blockquote class="poema">
+                        Aunque los mapas se interpongan y las horas no coincidan,<br>
+                        Y el cansancio te abrume tras tus estudios de medicina,<br>
+                        Saber que estás luchando con tanta pasión y brillo,<br>
+                        Es el hermoso inicio que nos hace tomar camino.
+                        <br><br>
+                        Cada mensaje y audio tuyo es un bálsamo en mi día,<br>
+                        Tu voz, el mejor pulso que mi alma podría tomar.<br>
+                        Y si el miedo a la distancia aparece, y hay melancolía,<br>
+                        Recuerda que lo bello apenas está por comenzar.
+                        <br><br>
+                        Este tiempo es solo la prueba de que hay algo real y cierto,<br>
+                        El coraje que tienes es más grande que este adiós.<br>
+                        La distancia nos enseña que un amor, aunque no esté abierto,<br>
+                        Vale cada duda si lo estamos sintiendo los dos.
+                        <br><br>
+                        Eres admirable, Ludmi, y en cada noche que te pienso,<br>
+                        Recuerdo que tu sueño vale esta pausa de esperar.<br>
+                        Y yo soy tu paciente más fiel, atento a este proceso,<br>
+                        Para ver a la Dra. triunfar y al fin poderte abrazar.
+                        <cite>— Alguien que está ansioso por seguir conociéndote.</cite>
+                    </blockquote>
+                </div>
+
+            </div>
+            
+        </section>
+
+        <section class="dedicatoria">
+            <h2>Mi Diagnóstico: Potencial sin Fronteras 🩺</h2>
+            <p>Es normal sentir miedo a la distancia, y es válido tener dudas. Pero nuestro tiempo juntos me demostró que lo que hay entre nosotros es especial y merece la oportunidad de crecer. Verte luchar por ser Doctora me inspira. Estoy dispuesto a enfrentar esta distancia si tú lo estás. ¡Aprovechemos este tiempo para conocernos aún más!</p>
+        </section>
+        
+        <section class="cierre-simple">
+            <h2>Un Último Pensamiento</h2>
+            <p>
+                "La distancia es un test. Si lo superamos, sabremos que lo que estamos conociendo es real y vale cada esfuerzo. Sigamos avanzando, un día a la vez."
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Hecha con amor incondicional por Dietmar Jaco. Eres la razón de mi felicidad. 💊❤️</p>
+    </footer>
+
+    <script>
+        const playlist = [
+            "musica/cancion.mp3",
+            "musica/cancion1.mp3", 
+            "musica/cancion2.mp3", 
+            "musica/cancion3.mp3"  
+        ];
+        let currentSongIndex = 0; 
+        
+        const audioPlayer = document.getElementById('audio-player');
+        
+        function playCurrentSong() {
+            if (playlist.length === 0) return;
+
+            if (currentSongIndex >= playlist.length) {
+                currentSongIndex = 0;
+            }
+
+            audioPlayer.src = playlist[currentSongIndex];
+            
+            const playPromise = audioPlayer.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                }).catch(error => {
+                    console.error("Falla al intentar reproducir audio después del clic:", error);
+                });
+            }
+        }
+
+        audioPlayer.addEventListener('ended', () => {
+            currentSongIndex++;
+            playCurrentSong();
+        });
+
+
+        const overlay = document.getElementById('loading-overlay');
+        const startButton = document.getElementById('start-button');
+        
+        startButton.addEventListener('click', function() {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500); 
+            
+            playCurrentSong(); 
+
+            elementoH1.style.opacity = 1;
+            escribirTexto();
+        });
+
+
+        const textoCompleto = "Ludmi: La Distancia es Solo un Diagnóstico Temporal";
+        const elementoH1 = document.getElementById('titulo-dinamico');
+        let i = 0;
+
+        function escribirTexto() {
+            if (i < textoCompleto.length) {
+                elementoH1.innerHTML = textoCompleto.substring(0, i + 1) + 
+                    '<span style="border-right: 0.15em solid var(--color-text-light); animation: blink-caret 0.75s step-end infinite; display: inline-block; height: 1em;">&nbsp;</span>';
+                i++;
+                setTimeout(escribirTexto, 100); 
+            } else {
+                elementoH1.innerHTML = textoCompleto;
+                elementoH1.style.opacity = 1;
+            }
+        }
+    </script>
+</body>
+</html>
